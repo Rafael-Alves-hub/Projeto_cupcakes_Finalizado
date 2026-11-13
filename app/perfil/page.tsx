@@ -10,7 +10,7 @@ import Footer from "@/app/components/Footer";
 import { AppProvider } from "@/app/lib/AppContext";
 import Modal from "@/app/lib/Modal"
 import Cart from "@/app/components/Cart"
-
+export const dynamic = 'force-dynamic';
 
 export default async function Perfil() {
 
