@@ -1,5 +1,4 @@
-
-
+import { Suspense } from 'react';
 import type { Product } from "./types/Product";
 import CardProduct from "./components/CardProduct";
 
@@ -39,7 +38,6 @@ export const products: Product[] = [
 ];
 
 export default function Home() {
-    
     return (
         <>
             <section className="hero" id="inicio">
@@ -54,7 +52,8 @@ export default function Home() {
                     <div className="hero-note"><span>✦</span> Produção artesanal - Ingredientes selecionados</div>
                 </div>
 
-                <div className="hero-image-wrap"><img className="hero-image" src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1000&q=85" alt="Cupcakes decorados com cobertura cremosa" />
+                <div className="hero-image-wrap">
+                    <img className="hero-image" src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1000&q=85" alt="Cupcakes decorados com cobertura cremosa" />
                     <div className="floating-note">
                         <span>♡</span>
                         <div>
@@ -65,25 +64,28 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="catalog-section" id="catalogo">
-                <div className="section-heading">
-                    <div>
-                        <span className="eyebrow">ESCOLHA SEU FAVORITO</span>
-                        <h2>Nossos <em>cupcakes</em></h2>
-                        <p>Sabores especiais para adoçar o seu dia.</p>
+            {}
+            <Suspense fallback={<div className="loading-catalog">A carregar catálogo...</div>}>
+                <section className="catalog-section" id="catalogo">
+                    <div className="section-heading">
+                        <div>
+                            <span className="eyebrow">ESCOLHA SEU FAVORITO</span>
+                            <h2>Nossos <em>cupcakes</em></h2>
+                            <p>Sabores especiais para adoçar o seu dia.</p>
+                        </div>
+                        <span className="product-total">04 sabores selecionados</span>
                     </div>
-                    <span className="product-total">04 sabores selecionados</span>
-                </div>
 
-                <div className="product-grid" id="product-grid">
-                    {products.map(item => (
-                        <CardProduct
-                            key={item.id}
-                            product={item}
-                        />
-                    ))}
-                </div>
-            </section>
+                    <div className="product-grid" id="product-grid">
+                        {products.map(item => (
+                            <CardProduct
+                                key={item.id}
+                                product={item}
+                            />
+                        ))}
+                    </div>
+                </section>
+            </Suspense>
 
             <section className="about-strip" id="sobre">
                 <span className="about-icon">♡</span>
