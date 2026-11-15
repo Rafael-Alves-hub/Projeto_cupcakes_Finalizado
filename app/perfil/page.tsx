@@ -1,18 +1,20 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { sql } from "@/app/util/db";
 import { verifySession } from "@/app/lib/Session";
-import { DM_Sans } from "next/font/google";
 import "@/app/globals.css";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import { AppProvider } from "@/app/lib/AppContext";
-import Modal from "@/app/lib/Modal"
-import Cart from "@/app/components/Cart"
-export const dynamic = 'force-dynamic';
 
 export default async function Perfil() {
+  return (
+    <Suspense fallback={<ProfileLoading />}>
+      <ProfileContent />
+    </Suspense>
+  );
+}
+
+async function ProfileContent() {
 
   const cookieStore = await cookies();
 
@@ -49,5 +51,14 @@ export default async function Perfil() {
         </div>
       </section>
     </>
+  );
+}
+
+function ProfileLoading() {
+  return (
+    <section className="catalog-section" id="catalogo">
+      <h1>Minha conta</h1>
+      <p>Carregando seu perfil...</p>
+    </section>
   );
 }
