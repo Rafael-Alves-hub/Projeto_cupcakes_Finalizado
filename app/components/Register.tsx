@@ -32,7 +32,7 @@ export default function Register(){
 
         e.preventDefault();
         try{
-            const call = await api.post("api/register", formData);
+            const call = await api.post("/api/register", formData);
             setMsg('Usuário cadastrado com sucesso!');
         }catch(e){
              setMsg('Usuário não cadastrado, erro!');
